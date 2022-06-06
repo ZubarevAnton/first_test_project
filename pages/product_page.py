@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from .base_page import BasePage
 from selenium.common.exceptions import NoAlertPresentException
 from math import log, sin
@@ -34,5 +33,10 @@ class ProductPage(BasePage):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRODUCT_PRICE).text
         assert product_price == basket_price, "Incorrect product price"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is present, but should not be"
 
-
+    def should_diseppeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared, but should be"
